@@ -46,8 +46,30 @@ function createCard(item) {
         comments.append(commentElement);
     }
 
+    const commentForm = document.createElement('form');
+    commentForm.setAttribute('class', 'comment-form');
 
-    imageCard.append(titleOfImage, imageEl, likesSection, comments);
+    const commentInput = document.createElement('input');
+    commentInput.setAttribute('class', 'comment-input');
+    commentInput.setAttribute('placeholder', 'Add a comment..');
+
+    const commentBtn = document.createElement('button');
+    commentBtn.setAttribute('class', 'comment-button');
+    commentBtn.textContent = 'Post';
+
+    commentForm.append(commentInput, commentBtn);
+
+    commentForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const commentContent = commentInput.value;
+        state.comments.push({ "content": commentContent, "imageId": item.id })
+        addNewCommentToTheServer(commentContent, item.id);
+        commentInput.value = '';
+        render();
+
+    })
+
+    imageCard.append(titleOfImage, imageEl, likesSection, comments, commentForm);
     cardSection.append(imageCard);
 }
 
@@ -81,6 +103,7 @@ function createNewForm() {
     container.append(title, formEl);
     cardSection.prepend(container);
 }
+
 function renderNewFormCard() {
 
     createNewForm();
@@ -116,4 +139,14 @@ getImages().then(function (image) {
     state.images = image;
     render();
 });
+
+function addNewCommentToTheServer(content, imageId) {
+    fetch('http://localhost:3000/comments', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ "content": content, "imageId": imageId })
+    })
+}
 render();

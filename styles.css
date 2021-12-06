@@ -105,6 +105,7 @@
     width: 83%;
     border: none;
     font-size: 0.8rem;
+    
   }
   
   .comment-input:focus {
@@ -155,7 +156,7 @@
     width: 350px;
     background-color: white;
   }
-  input{
+  .new-post-article input{
     border:none;
     margin: 10px;
     padding:3px;
