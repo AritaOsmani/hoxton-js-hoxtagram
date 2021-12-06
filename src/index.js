@@ -99,6 +99,16 @@ function createNewForm() {
     submitBtn.textContent = 'Post';
 
     formEl.append(titleInput, urlInput, submitBtn);
+    formEl.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const title = titleInput.value;
+        const url = urlInput.value;
+        state.images.unshift({ "title": title, "likes": 2, "image": url });
+        addNewImageToTheServer(title, url);
+        titleInput.value = ''
+        urlInput.value = ''
+        render()
+    })
 
     container.append(title, formEl);
     cardSection.prepend(container);
@@ -147,6 +157,15 @@ function addNewCommentToTheServer(content, imageId) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({ "content": content, "imageId": imageId })
+    })
+}
+function addNewImageToTheServer(title, url) {
+    fetch('http://localhost:3000/images', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ "title": title, "likes": 2, "image": url })
     })
 }
 render();

@@ -11,6 +11,18 @@
       "title": "Coder cats",
       "likes": 5,
       "image": "./assets/coder-cat.jpeg"
+    },
+    {
+      "title": "New Dog",
+      "likes": 1,
+      "image": "https://miro.medium.com/max/1000/1*n3awIe-CoSMRSCbGFrWMhA.jpeg",
+      "id": 3
+    },
+    {
+      "title": "Coder Car",
+      "likes": 1,
+      "image": "https://miro.medium.com/max/3600/0*n-2bW82Z6m6U2bij.jpeg",
+      "id": 4
     }
   ],
   "comments": [
@@ -53,6 +65,11 @@
       "content": "New Comment",
       "imageId": 2,
       "id": 10
+    },
+    {
+      "content": "New Dog",
+      "imageId": 3,
+      "id": 11
     }
   ]
 }
